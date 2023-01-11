@@ -1,20 +1,22 @@
-$(document).ready(function () {
-  $("body").on('click', '.toggle-password', function () {
-
-    $(this).toggleClass("fa-eye fa-eye-slash");
-    var input = $("#pass_log_id");
-    if (input.attr("type") === "password") {
-      input.attr("type", "text");
-
+$(document).ready(function() {
+    let $pw = $('#password');
+    let $t = $('#toggle');
+    
+    function setOriginalState() {
+      $pw.attr('type', 'password');
+      $t.attr('src','eyeimage.jpeg');
     }
-    else if (input.attr("type") === "text") {
-      input.attr("type", "password");
-      setTimeout(change, 1000);
-    }
+  
+    $t.on('click', () => {
+      const isPw = $pw.attr('type') === 'password'
+      
+      if (isPw) {
+        $pw.attr('type', 'text');
+        $t.attr('src','eyeslash.jpeg');
+        
+        setTimeout(setOriginalState, 10000);
+      } else {
+        setOriginalState();
+      }
+    })
   });
-
-  function change() {
-    input.attr("type", "password");
-  }
-
-});
